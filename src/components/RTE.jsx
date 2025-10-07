@@ -8,7 +8,7 @@ const RTE = forwardRef(function RTE({ value = "", onChange, onInit },ref) {
     <div>
       <Editor
         ref={ref}
-        apiKey='ux5b8lrrmgvffm4wah6hhb60yeqtrjzh8chfq1h5iwq92mag'
+        apiKey='no-api-key'
         initialValue={value}
         onInit={(evt, editor) => onInit && onInit(editor)}
         onEditorChange={(content) => onChange && onChange(content)}
