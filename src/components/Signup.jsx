@@ -16,7 +16,10 @@ function Signup() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    clearErrors
+  } = useForm({
+    reValidateMode: "onSubmit",
+  });
 
   const onSubmit = async (data) => {
     setLoader(true);
@@ -24,7 +27,7 @@ function Signup() {
       const userData = await auth.createAccount({
         email: data.email,
         password: data.password,
-        name : data.name,
+        name: data.name,
       });
       dispatch(login(userData));
       navigate("/");
@@ -36,7 +39,7 @@ function Signup() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="w-[420px] bg-white px-3 py-5 rounded shadow flex flex-col justify-center items-center min-h-[calc(90vh-236px)]">
+      <div className="w-[420px] bg-white px-3 py-5 rounded-xl shadow flex flex-col justify-center items-center min-h-[calc(90vh-236px)]">
         <div className=" pb-7 text-center">
           <h2 className="font-bold ">Signup</h2>
         </div>
@@ -49,10 +52,14 @@ function Signup() {
             {...register("name", {
               required: errMsg.name,
             })}
+            onChange={()=>{
+              clearErrors("name")
+            }}
           />
-
-          {errors.username && (
-            <p className="text-red-500">{errors.name.message}</p>
+          {errors.name && (
+            <div className="mb-2 h-[30px] mt-[-20px] errorShower">
+              <p className="text-red-500">{errors.name.message}</p>
+            </div>
           )}
 
           <Input
@@ -66,10 +73,17 @@ function Signup() {
                 /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                 errMsg.email.valid,
             })}
+             onChange={()=>{
+              clearErrors("email")
+            }}
           />
-          {errors.username && (
-            <p className="text-red-500">{errors.email.message}</p>
-          )}
+          <div>
+            {errors.email && (
+              <div className="mb-2 h-[30px] mt-[-20px] errorShower">
+                <p className="text-red-500">{errors.email.message}</p>
+              </div>
+            )}
+          </div>
 
           {/* Password input box */}
           <Input
@@ -87,12 +101,19 @@ function Signup() {
                 message: errMsg.password.minLength,
               },
             })}
+             onChange={()=>{
+              clearErrors("password")
+            }}
           />
-          {errors.password && (
-            <p className="text-red-500">{errors.password.message}</p>
-          )}
+          <div>
+            {errors.password && (
+              <div className="mb-5 h-[30px] mt-[-20px] errorShower">
+                <p className="text-red-500">{errors.password.message}</p>
+              </div>
+            )}
+          </div>
 
-          {error && <p className="text-red-500">{error}</p>}
+          <div className="errorShower">{error && <p className="my-2 text-red-500">{error}</p>}</div>
 
           <div className="flex justify-between px-4 mt-3">
             <Button label={loader ? "signuping.." : "Signup"} type="submit" />

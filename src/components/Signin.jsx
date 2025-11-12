@@ -17,7 +17,10 @@ function Signin() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    clearErrors,
+  } = useForm({
+    reValidateMode: "onSubmit",
+  });
 
   const onSubmit = async (data) => {
     setLoader(true);
@@ -36,10 +39,9 @@ function Signin() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="w-[300px] bg-white px-3 py-5 rounded shadow flex flex-col justify-center items-center min-h-[calc(90vh-236px)]">
+      <div className="w-[420px] bg-white px-3 py-8 rounded-xl shadow flex flex-col justify-center items-center min-h-[calc(90vh-236px)]">
         <div className=" pb-7 text-center">
-          <p className="font-semibold">login then see all posts !!</p>
-          <h2 className="font-bold text-2xl">Signin </h2>
+          <h2 className="mb-4 font-bold text-2xl">Signin </h2>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Username input box */}
@@ -53,10 +55,15 @@ function Signin() {
                 /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                 errMsg.username.vailid,
             })}
+            onChange={() => {
+              clearErrors("username");
+            }}
           />
-          {errors.username && (
-            <p className="text-red-500">{errors.username.message}</p>
-          )}
+          <div className=" h-[40px] mb-2 mt-[-20px] errorShower">
+            {errors.username && (
+              <p className="text-red-500">{errors.username.message}</p>
+            )}
+          </div>
 
           {/* Password input box */}
           <Input
@@ -74,12 +81,19 @@ function Signin() {
                 message: errMsg.password.minLength,
               },
             })}
+             onChange={() => {
+              clearErrors("password");
+            }}
           />
-          {errors.password && (
-            <p className="text-red-500">{errors.password.message}</p>
-          )}
+          <div className="h-[50px] mt-[-20px] errorShower">
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
+          </div>
 
-          {error && <p className="text-red-500">{error}</p>}
+          <div className="errorShower">
+            {error && <p className="text-red-500">{error}</p>}
+          </div>
 
           <div className="flex justify-between px-4 mt-3">
             <Button label={loader ? "signing..." : "Signin"} type="submit" />

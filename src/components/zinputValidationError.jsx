@@ -5,8 +5,8 @@ const errMsg = {
     },
     password : {
         required : "please enter password",
-        minLength : "The password shoud be more then 6 character",
-        maxLength : "The password shoud be less then 10 character"
+        minLength : "The password shoud be 6 char",
+        maxLength : "less then 10 character"
     },
     name : "please enter name",
     email : {

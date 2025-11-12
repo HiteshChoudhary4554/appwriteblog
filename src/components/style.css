@@ -1,6 +1,9 @@
 .checkBox {
   display: none;
 }
+.errorShower {
+  width: 300px;
+}
 .menuBurgur {
   display: none;
 }
@@ -33,7 +36,7 @@
     background-color: black;
     border: 1px solid black;
     height: 2px;
-    width: 35px;
+    width: 30px;
     transition: all 0.5s ease;
   }
 
@@ -41,7 +44,7 @@
     right: 130px;
   }
   .checkBox:checked ~ .menuBurgur .burgur1 {
-    transform: rotate(45deg);
+    transform: rotate(40deg);
     transform-origin: top left;
     background-color: white;
     border-color: white;
@@ -53,7 +56,7 @@
   .checkBox:checked ~ .menuBurgur .burgur3 {
     transform: rotate(-45deg);
     transform-origin: bottom left;
-    top: 6.5px;
+    top: 2px;
     position: relative;
     background-color: white;
     border-color: white;
@@ -70,14 +73,17 @@
     top: 0.1%;
     right: -170px;
     box-shadow: -2px 2px 10px 2px gray;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
     transition: right 400ms ease;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
   }
   .checkBox:checked ~ #menu {
     right: 0px;
-    display: flex;
+    opacity: 1;
+    visibility: visible;
   }
   #item {
     font-size: 20px;
