@@ -1,0 +1,145 @@
+.checkBox {
+  display: none;
+}
+.menuBurgur {
+  display: none;
+}
+@media (width <= 720px) {
+  .checkBox {
+    display: inline-block;
+    position: absolute;
+    top: 2.8%;
+    right: 42px;
+    transform: translateY(-100px);
+    transform: scale(2.5);
+    z-index: 11;
+    opacity: 0;
+  }
+  .checkBox:checked {
+    right: 145px;
+  }
+  .menuBurgur {
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
+    position: absolute;
+    top: 2.2%;
+    right: 31px;
+    z-index: 10;
+    transition: all 0.5s ease;
+  }
+  .menuBurgur span {
+    display: block;
+    background-color: black;
+    border: 1px solid black;
+    height: 2px;
+    width: 35px;
+    transition: all 0.5s ease;
+  }
+
+  .checkBox:checked ~ .menuBurgur {
+    right: 130px;
+  }
+  .checkBox:checked ~ .menuBurgur .burgur1 {
+    transform: rotate(45deg);
+    transform-origin: top left;
+    background-color: white;
+    border-color: white;
+  }
+  .checkBox:checked ~ .menuBurgur .burgur2 {
+    opacity: 0;
+  }
+
+  .checkBox:checked ~ .menuBurgur .burgur3 {
+    transform: rotate(-45deg);
+    transform-origin: bottom left;
+    top: 6.5px;
+    position: relative;
+    background-color: white;
+    border-color: white;
+  }
+  #menu {
+    flex-direction: column;
+    width: 180px;
+    height: 200px;
+    background-color: rgb(81, 79, 79);
+    color: white !important;
+    align-items: center;
+    position: absolute;
+    padding-block: 20px;
+    top: 0.1%;
+    right: -170px;
+    box-shadow: -2px 2px 10px 2px gray;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transition: right 400ms ease;
+    display: none;
+  }
+  .checkBox:checked ~ #menu {
+    right: 0px;
+    display: flex;
+  }
+  #item {
+    font-size: 20px;
+    display: inline-block;
+  }
+
+  #menu a {
+    color: white !important;
+    text-decoration: none;
+  }
+  .footerDes {
+    text-align: center;
+    width: 330px;
+    margin-left: -58px;
+  }
+}
+
+@media (width <= 830px) {
+  .contentPost {
+    width: 500px;
+  }
+  .containerForm {
+    flex-direction: column;
+    align-items: center;
+  }
+  .containerForm .div1,
+  .div2 {
+    width: 80%;
+  }
+}
+
+@media (width <= 630px) {
+  .containerForm {
+    flex-direction: column;
+    align-items: center;
+  }
+  .containerForm .div1,
+  .div2 {
+    width: 90%;
+  }
+}
+
+@media (width <= 575px) {
+  .contentPost {
+    width: 400px;
+  }
+}
+@media (width <= 451px) {
+  .contentPost {
+    width: 300px;
+  }
+  .footerDes {
+    text-align: center;
+    width: 300px;
+    margin-left: -80px;
+  }
+  .containerForm {
+    flex-direction: column;
+    align-items: center;
+  }
+  .containerForm .div1,
+  .div2 {
+    width: 98%;
+  }
+}
