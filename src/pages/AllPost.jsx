@@ -17,7 +17,7 @@ function AllPost() {
 
   if (posts && posts.length > 0) {
     return (
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-4">
+      <div className="grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-4">
         {posts.map((post) => (
           <PostCard
             onClick={() => navigate(`/post/${post.$id}`)}
