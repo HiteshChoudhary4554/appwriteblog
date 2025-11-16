@@ -7,7 +7,7 @@ import auth from "../../../appwrite/auth";
 
 function Header() {
   const dispatch = useDispatch();
-  const authStatus = useSelector((state) => state.authStatus);
+  const authStatus = useSelector((state) => state.auth.authStatus);
   const navItem = [
     {
       name: "Home",

@@ -4,14 +4,17 @@ import { Input, errMsg, RTE, Select, Button } from "../Index/index";
 import dataStore from "../../appwrite/Config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchTodo } from "../Store/todoSlice";
 
 function PostForm({ post }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.userData);
+  const userData = useSelector((state) => state.auth.userData);
   const titleId = useRef();
   const slugId = useRef();
   const imgId = useRef();
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
   const {
     register,
     handleSubmit,
@@ -37,7 +40,7 @@ function PostForm({ post }) {
       .trim()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "")
-      .slice(0, 36); 
+      .slice(0, 36);
   };
 
   useEffect(() => {
@@ -46,7 +49,7 @@ function PostForm({ post }) {
   }, [title, setValue]);
 
   const onSubmit = async (data) => {
-    setLoader(true)
+    setLoader(true);
     if (post) {
       let imageid = post.imageid ? post.imageid : undefined;
       if (data.file[0]) {
@@ -66,6 +69,7 @@ function PostForm({ post }) {
         },
         post.$id
       );
+      dispatch(fetchTodo());
       navigate(`/post/${document.$id}`);
     } else {
       let imageid = undefined;
@@ -80,6 +84,7 @@ function PostForm({ post }) {
         status: data.status,
         userid: userData.$id,
       });
+      dispatch(fetchTodo());
       navigate(`/post/${document.$id}`);
     }
   };
@@ -141,7 +146,10 @@ function PostForm({ post }) {
               <p className="text-red-500">{errors.file.message}</p>
             )}
             <div className="text-center">
-              <Button label={loader?"adding post...":"Add Post"} type="submit" />
+              <Button
+                label={loader ? "adding post..." : "Add Post"}
+                type="submit"
+              />
             </div>
           </div>
         </div>

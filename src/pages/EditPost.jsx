@@ -1,27 +1,14 @@
-import React,{useState, useEffect} from "react";
+import React from "react";
 import { PostForm } from "../Index";
 import { useParams } from "react-router-dom";
-import dataStore from "../../appwrite/Config";
+import { useSelector } from "react-redux";
 
 function EditPost() {
-  const { id } = useParams();
-  const [loader, setLoader] = useState(false)
-  const [post, setPost] = useState({});
-  useEffect(() => {
-    const fetchDocument = async () => {
-      try {
-        const document = await dataStore.getDocument(id);
-        setPost(document);
-        setLoader(true);
-      } catch (error) {
-        console.error("Error fetching document:", error);
-      }
-    };
+  const { index } = useParams();
+  const todos = useSelector((state) => state.todo.todos);
+  const post = todos[index];
 
-    fetchDocument();
-  }, [id, setPost]);
-
-  return loader?<PostForm post={post} />:<h2>Loading please wait...</h2>;
+  return <PostForm post={post} />;
 }
 
 export default EditPost;

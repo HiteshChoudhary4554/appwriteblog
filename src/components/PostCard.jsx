@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from "react";
-import dataStore from "../../appwrite/Config";
+import React from "react";
 
 function PostCard({ post, onClick }) {
-  const [imageUrl, setImageUrl] = useState();
-  useEffect(() => {
-    async function fetch() {
-      const url = await dataStore.imageView(post.imageid);
-      setImageUrl(url.href || url);
-    }
-    fetch();
-  }, [setImageUrl, post.imageid]);
-
   return (
     <div
       onClick={onClick}
@@ -18,9 +8,15 @@ function PostCard({ post, onClick }) {
     >
       {post.imageid && (
         <div className="mb-2 rounded overflow-hidden h-[220px]">
-          {imageUrl && (
-            <img src={imageUrl} alt="Post Image" className="rounded" />
-          )}
+          {post.imageUrl && (
+            <img
+              src={post.imageUrl}
+              alt="preview"
+              loading="lazy"
+              decoding="async"
+              className="rounded"
+            />
+          )} 
         </div>
       )}
       <div className="my-2 px-3 mb-2">

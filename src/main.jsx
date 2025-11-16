@@ -72,7 +72,7 @@ let router = createBrowserRouter(
         }
       />
       <Route
-        path="/post/:id"
+        path="/post/:index/:id"
         element={
           <Protected>
             <Post />
@@ -80,7 +80,7 @@ let router = createBrowserRouter(
         }
       />
       <Route
-        path="/edit-post/:id"
+        path="/edit-post/:index"
         element={
           <Protected>
             <EditPost />

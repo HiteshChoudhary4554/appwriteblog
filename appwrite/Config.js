@@ -137,7 +137,7 @@ class config {
     }
   }
 
-  async imagePreview(imageid) {
+  async imagePreView(imageid) {
     try {
       const bucketId =
         Conf?.StorageId || Conf?.storageId || import.meta.env.VITE_APPWRITE_BUCKET_ID;

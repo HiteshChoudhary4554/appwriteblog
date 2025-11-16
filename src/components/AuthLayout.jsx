@@ -7,7 +7,7 @@ import authService from "../../appwrite/auth";
 function AuthLayout({ children, authentication = true }) {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-  const authStatus = useSelector((state) => state.authStatus);
+  const authStatus = useSelector((state) => state.auth.authStatus);
   const dispatch = useDispatch();
   
   useEffect(() => {
